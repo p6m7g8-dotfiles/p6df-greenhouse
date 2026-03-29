@@ -39,21 +39,22 @@ p6df::modules::greenhouse::prompt::mod() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::greenhouse::profile::on(profile, api_key)
+# Function: p6df::modules::greenhouse::profile::on(profile, code)
 #
 #  Args:
 #	profile -
-#	api_key -
+#	code - shell code block (export GREENHOUSE_API_KEY=...)
 #
 #  Environment:	 P6_DFZ_PROFILE_GREENHOUSE GREENHOUSE_API_KEY
 #>
 ######################################################################
 p6df::modules::greenhouse::profile::on() {
   local profile="$1"
-  local api_key="$2"
+  local code="$2"
+
+  p6_run_code "$code"
 
   p6_env_export "P6_DFZ_PROFILE_GREENHOUSE" "$profile"
-  p6_env_export "GREENHOUSE_API_KEY" "$api_key"
 
   p6_return_void
 }
@@ -61,15 +62,19 @@ p6df::modules::greenhouse::profile::on() {
 ######################################################################
 #<
 #
-# Function: p6df::modules::greenhouse::profile::off()
+# Function: p6df::modules::greenhouse::profile::off(code)
 #
-#  Environment:	 P6_DFZ_PROFILE_GREENHOUSE GREENHOUSE_API_KEY
+#  Args:
+#	code - shell code block previously passed to profile::on
+#
+#  Environment:	 GREENHOUSE_API_KEY P6_DFZ_PROFILE_GREENHOUSE
 #>
 ######################################################################
 p6df::modules::greenhouse::profile::off() {
+  local code="$1"
 
+  p6_env_unset_from_code "$code"
   p6_env_export_un P6_DFZ_PROFILE_GREENHOUSE
-  p6_env_export_un GREENHOUSE_API_KEY
 
   p6_return_void
 }
@@ -84,6 +89,9 @@ p6df::modules::greenhouse::profile::off() {
 p6df::modules::greenhouse::mcp() {
 
   p6_js_npm_global_install "greenhouse-mcp"
+
+  p6df::modules::anthropic::mcp::server::add "greenhouse" "npx" "-y" "greenhouse-mcp"
+  p6df::modules::openai::mcp::server::add "greenhouse" "npx" "-y" "greenhouse-mcp"
 
   p6_return_void
 }

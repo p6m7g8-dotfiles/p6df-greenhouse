@@ -17,7 +17,8 @@
 
 ## Summary
 
-p6df-greenhouse provides shell profile management for Greenhouse, the applicant tracking system. It sources the GREENHOUSE_API_KEY from 1Password and exports it into the shell environment.
+p6df-greenhouse provides shell profile management for Greenhouse, the applicant tracking system.
+It sources the GREENHOUSE_API_KEY from 1Password and exports it into the shell environment.
 
 ## Contributing
 

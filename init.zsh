@@ -42,5 +42,5 @@ p6df::modules::greenhouse::mcp() {
 ######################################################################
 p6df::modules::greenhouse::profile::mod() {
 
-  p6_return_words 'greenhouse' '$GREENHOUSE_API_KEY'
+  p6_return_words 'greenhouse' "$"
 }

@@ -32,10 +32,10 @@ p6df::modules::greenhouse::mcp() {
 ######################################################################
 #<
 #
-# Function: words greenhouse $GREENHOUSE_API_KEY = p6df::modules::greenhouse::profile::mod()
+# Function: words greenhouse = p6df::modules::greenhouse::profile::mod()
 #
 #  Returns:
-#	words - greenhouse $GREENHOUSE_API_KEY
+#	words - greenhouse
 #
 #  Environment:	 GREENHOUSE_API_KEY
 #>
